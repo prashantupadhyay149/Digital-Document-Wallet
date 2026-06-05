@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Document Wallet — Delete Account</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 640px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        h1 { color: #333; font-size: 26px; margin-bottom: 8px; }
+        .subtitle { color: #666; font-size: 14px; margin-bottom: 28px; }
+        .step {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: #f5f7fa;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+        .step-num {
+            background: #667eea;
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .step-text { font-size: 15px; color: #333; line-height: 1.5; }
+        .step-text strong { color: #667eea; }
+        h2 { font-size: 18px; color: #333; margin: 24px 0 12px; }
+        ul { padding-left: 20px; color: #555; line-height: 1.7; }
+        .note {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 14px 18px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        .note strong { color: #333; }
+        .footer { text-align: center; margin-top: 24px; font-size: 13px; color: #999; }
+        .footer a { color: #667eea; text-decoration: none; }
+        .divider { display: flex; align-items: center; margin: 28px 0; color: #999; font-size: 13px; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid #e0e0e0; }
+        .divider::before { margin-right: 12px; }
+        .divider::after { margin-left: 12px; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 6px; }
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus { border-color: #667eea; }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        .success { background: #d4edda; color: #155724; padding: 14px; border-radius: 12px; text-align: center; display: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Digital Document Wallet</h1>
+        <p class="subtitle">Request to delete your account and associated data</p>
+
+        <h2>Option 1: Delete from the app</h2>
+        <div class="step">
+            <span class="step-num">1</span>
+            <div class="step-text">Open the <strong>Digital Document Wallet</strong> app on your device.</div>
+        </div>
+        <div class="step">
+            <span class="step-num">2</span>
+            <div class="step-text">Go to <strong>Profile</strong> (tap the person icon in the top-right).</div>
+        </div>
+        <div class="step">
+            <span class="step-num">3</span>
+            <div class="step-text">Scroll down and tap <strong>"Delete Account"</strong>.</div>
+        </div>
+        <div class="step">
+            <span class="step-num">4</span>
+            <div class="step-text">Confirm the deletion by tapping <strong>"Delete"</strong>.</div>
+        </div>
+
+        <div class="divider">OR</div>
+
+        <h2>Option 2: Request deletion by email</h2>
+        <p style="color:#555;font-size:14px;margin-bottom:16px;">Fill in the form below and we'll process your request within 48 hours.</p>
+        <form id="deleteForm">
+            <div class="form-group">
+                <label for="email">Your Email *</label>
+                <input type="email" id="email" required placeholder="you@example.com">
+            </div>
+            <div class="form-group">
+                <label for="reason">Reason (optional)</label>
+                <textarea id="reason" rows="3" placeholder="Tell us why you're leaving..."></textarea>
+            </div>
+            <button type="submit">Submit Deletion Request</button>
+            <div class="success" id="successMsg">✅ Your request has been submitted. We'll process it within 48 hours.</div>
+        </form>
+
+        <div class="note">
+            <strong>⚠️ Permanent action.</strong> Deletion cannot be undone. Back up any important documents before proceeding.
+        </div>
+
+        <h2 style="margin-top:28px;">What gets deleted</h2>
+        <ul>
+            <li>Your account (email &amp; password)</li>
+            <li>Profile information (name, mobile number)</li>
+            <li>All uploaded documents and metadata</li>
+            <li>Local encrypted files on your device</li>
+        </ul>
+
+        <h2>What is retained</h2>
+        <ul>
+            <li>Nothing — all data is permanently removed.</li>
+        </ul>
+
+        <div class="footer">
+            Need help? <a href="mailto:support@vnexus.com">support@vnexus.com</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('deleteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const reason = document.getElementById('reason').value;
+            const btn = this.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            try {
+                const res = await fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: email,
+                        reason: reason,
+                        subject: 'Account Deletion Request - Digital Document Wallet'
+                    })
+                });
+                if (res.ok) {
+                    document.getElementById('successMsg').style.display = 'block';
+                    this.reset();
+                } else {
+                    alert('Something went wrong. Please email us directly at support@vnexus.com');
+                }
+            } catch {
+                alert('Something went wrong. Please email us directly at support@vnexus.com');
+            }
+            btn.disabled = false;
+            btn.textContent = 'Submit Deletion Request';
+        });
+    </script>
+</body>
+</html>
